@@ -2,17 +2,7 @@ import 'package:dio/dio.dart';
 import '../models/product_model.dart';
 import '../../core/error/exceptions.dart';
 
-/// Data source for fetching products from Shopware 6 API.
 abstract class RemoteDataSource {
-  /// Fetches a list of products using the provided query parameters.
-  ///
-  /// [page] and [limit] for pagination.
-  /// [filters] and [postFilters] are arrays of filter definitions.
-  /// [sorts] is an array of sort definitions.
-  /// [associations] for including related entities.
-  /// [aggregations] for facet data.
-  /// [grouping] and [fields] to limit response.
-  /// [totalCountMode] controls including total count in response.
   Future<List<ProductModel>> fetchProducts({
     required int page,
     required int limit,
@@ -74,7 +64,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       } else {
         throw ServerException();
       }
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       throw ServerException();
     }
   }

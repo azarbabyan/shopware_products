@@ -24,12 +24,15 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         page: event.page,
         limit: event.limit,
         sort: event.sort,
+        minPrice: event.minPrice,
+        maxPrice: event.maxPrice,
+        productType: event.productType,
       ),
     );
     failureOrProducts.fold(
       (failure) => emit(
         ProductError(
-          message: failure is ServerFailure ? 'Server error' : 'No cached data',
+          message: failure is ServerFailure ? 'Server error' : 'No Internet',
         ),
       ),
       (products) => emit(ProductLoaded(products: products)),

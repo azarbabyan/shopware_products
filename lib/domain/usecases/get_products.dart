@@ -16,6 +16,9 @@ class GetProducts
       page: params.page,
       limit: params.limit,
       sort: params.sort,
+      minPrice: params.minPrice,
+      maxPrice: params.maxPrice,
+      productType: params.productType,
     );
   }
 }
@@ -25,10 +28,17 @@ class GetProductsParams {
   final int page;
   final int limit;
   final String sort;
+  final double? minPrice;
+  final double? maxPrice;
+  final String? productType;
+
   GetProductsParams({
     required this.categoryId,
     this.page = 1,
     this.limit = 20,
     this.sort = 'name:asc',
+    this.minPrice,
+    this.maxPrice,
+    this.productType,
   });
 }

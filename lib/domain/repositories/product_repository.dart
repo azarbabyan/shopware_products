@@ -8,5 +8,8 @@ abstract class ProductRepository {
     int page = 1,
     int limit = 20,
     String sort = 'name:asc',
+    double? minPrice,
+    double? maxPrice,
+    String? productType,
   });
 }

@@ -4,7 +4,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 
 import '../core/network/network_info.dart';
-import '../data/datasources/local_data_source.dart';
 import '../data/datasources/remote_data_source.dart';
 import '../data/repositories/product_repository_impl.dart';
 import '../domain/repositories/product_repository.dart';
@@ -40,15 +39,11 @@ Future<void> setupLocator() async {
   getIt.registerLazySingleton<RemoteDataSource>(
     () => RemoteDataSourceImpl(getIt<Dio>()),
   );
-  getIt.registerLazySingleton<LocalDataSource>(() => LocalDataSourceImpl(box));
 
   // Repository
   getIt.registerLazySingleton<ProductRepository>(
-    () => ProductRepositoryImpl(
-      getIt<RemoteDataSource>(),
-      getIt<LocalDataSource>(),
-      getIt<NetworkInfo>(),
-    ),
+    () =>
+        ProductRepositoryImpl(getIt<RemoteDataSource>(), getIt<NetworkInfo>()),
   );
 
   // Use cases
